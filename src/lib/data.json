@@ -1,0 +1,932 @@
+{
+  "totalCases": 979,
+  "totalHallucinations": 3196,
+  "totalPenalties": 178,
+  "totalSanctions": 87,
+  "totalPenaltySum": 2007342,
+  "avgPenalty": 11277,
+  "medianPenalty": 1500,
+  "minPenalty": 1,
+  "maxPenalty": 620000,
+  "penaltyRanges": [
+    {
+      "range": "<$500",
+      "count": 35
+    },
+    {
+      "range": "$500–$1K",
+      "count": 20
+    },
+    {
+      "range": "$1K–$5K",
+      "count": 64
+    },
+    {
+      "range": "$5K–$10K",
+      "count": 30
+    },
+    {
+      "range": "$10K–$25K",
+      "count": 16
+    },
+    {
+      "range": "$25K–$50K",
+      "count": 5
+    },
+    {
+      "range": "$50K–$100K",
+      "count": 5
+    },
+    {
+      "range": "$100K+",
+      "count": 3
+    }
+  ],
+  "topPenalties": [
+    {
+      "name": "Ortiz Fatima Cecilia v. Booking.com y otros",
+      "country": "Argentina",
+      "date": "2026-02-02",
+      "amount": 620000,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Arabyads Holding Limited v. Gulrez Alam Marghoob Alam",
+      "country": "UAE",
+      "date": "2025-12-18",
+      "amount": 282508,
+      "party": "Lawyer",
+      "outcomeCategory": "Other"
+    },
+    {
+      "name": "Crypto Open Patent Alliance v. Wright (2)",
+      "country": "UK",
+      "date": "2025-05-12",
+      "amount": 100000,
+      "party": "Pro Se Litigant",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "ByoPlanet International v. Johansson and Gilstrap",
+      "country": "USA",
+      "date": "2025-07-15",
+      "amount": 85567,
+      "party": "Lawyer",
+      "outcomeCategory": "Case Dismissed"
+    },
+    {
+      "name": "Minjie Zheng v. ICANN",
+      "country": "USA",
+      "date": "2025-12-23",
+      "amount": 66129,
+      "party": "Pro Se Litigant",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Howell Management Services, LLC v. Vashisht-Rota",
+      "country": "USA",
+      "date": "2025-12-15",
+      "amount": 64235,
+      "party": "Pro Se Litigant",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Shana Jordan, et al. v. Chicago Housing Authority et al.",
+      "country": "USA",
+      "date": "2025-12-05",
+      "amount": 59500,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Mahala Association (מהל\"ה) v. Clalit Health Services et al.",
+      "country": "",
+      "date": "2025-05-26",
+      "amount": 50000,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Lacey v. State Farm General Insurance",
+      "country": "USA",
+      "date": "2025-05-06",
+      "amount": 31100,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Mattox v. Product Innovation Research",
+      "country": "USA",
+      "date": "2025-10-22",
+      "amount": 28495,
+      "party": "Lawyer",
+      "outcomeCategory": "Warning/Admonishment"
+    },
+    {
+      "name": "Matthew Lewis v. Eagle County Government",
+      "country": "USA",
+      "date": "2025-11-14",
+      "amount": 28000,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Unknown Case Number",
+      "country": "Belgium",
+      "date": "2025-12-25",
+      "amount": 25000,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Zlatin v. Assayag et al",
+      "country": "Israel",
+      "date": "2025-07-11",
+      "amount": 25000,
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Bandla v. Solicitors Regulation Authority",
+      "country": "UK",
+      "date": "2025-05-13",
+      "amount": 24727,
+      "party": "Pro Se Litigant",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Puerto Rico Soccer League NFP, Corp., et al. v. Federación Puertorriqueña de Futbol, et al.",
+      "country": "USA",
+      "date": "2025-09-23",
+      "amount": 24492,
+      "party": "Lawyer",
+      "outcomeCategory": "Other"
+    }
+  ],
+  "penaltyByYear": [
+    {
+      "year": "2023",
+      "total": 7604
+    },
+    {
+      "year": "2024",
+      "total": 15000
+    },
+    {
+      "year": "2025",
+      "total": 1302010
+    },
+    {
+      "year": "2026",
+      "total": 682728
+    }
+  ],
+  "byYear": [
+    {
+      "year": "2023",
+      "count": 15
+    },
+    {
+      "year": "2024",
+      "count": 54
+    },
+    {
+      "year": "2025",
+      "count": 728
+    },
+    {
+      "year": "2026",
+      "count": 182
+    }
+  ],
+  "timeline": [
+    {
+      "month": "2023-04",
+      "count": 1,
+      "cumulative": 1
+    },
+    {
+      "month": "2023-05",
+      "count": 2,
+      "cumulative": 3
+    },
+    {
+      "month": "2023-06",
+      "count": 3,
+      "cumulative": 6
+    },
+    {
+      "month": "2023-07",
+      "count": 1,
+      "cumulative": 7
+    },
+    {
+      "month": "2023-09",
+      "count": 1,
+      "cumulative": 8
+    },
+    {
+      "month": "2023-10",
+      "count": 2,
+      "cumulative": 10
+    },
+    {
+      "month": "2023-11",
+      "count": 4,
+      "cumulative": 14
+    },
+    {
+      "month": "2023-12",
+      "count": 1,
+      "cumulative": 15
+    },
+    {
+      "month": "2024-01",
+      "count": 2,
+      "cumulative": 17
+    },
+    {
+      "month": "2024-02",
+      "count": 4,
+      "cumulative": 21
+    },
+    {
+      "month": "2024-03",
+      "count": 4,
+      "cumulative": 25
+    },
+    {
+      "month": "2024-04",
+      "count": 2,
+      "cumulative": 27
+    },
+    {
+      "month": "2024-05",
+      "count": 1,
+      "cumulative": 28
+    },
+    {
+      "month": "2024-06",
+      "count": 1,
+      "cumulative": 29
+    },
+    {
+      "month": "2024-07",
+      "count": 5,
+      "cumulative": 34
+    },
+    {
+      "month": "2024-08",
+      "count": 7,
+      "cumulative": 41
+    },
+    {
+      "month": "2024-09",
+      "count": 6,
+      "cumulative": 47
+    },
+    {
+      "month": "2024-10",
+      "count": 5,
+      "cumulative": 52
+    },
+    {
+      "month": "2024-11",
+      "count": 7,
+      "cumulative": 59
+    },
+    {
+      "month": "2024-12",
+      "count": 10,
+      "cumulative": 69
+    },
+    {
+      "month": "2025-01",
+      "count": 14,
+      "cumulative": 83
+    },
+    {
+      "month": "2025-02",
+      "count": 12,
+      "cumulative": 95
+    },
+    {
+      "month": "2025-03",
+      "count": 23,
+      "cumulative": 118
+    },
+    {
+      "month": "2025-04",
+      "count": 26,
+      "cumulative": 144
+    },
+    {
+      "month": "2025-05",
+      "count": 45,
+      "cumulative": 189
+    },
+    {
+      "month": "2025-06",
+      "count": 36,
+      "cumulative": 225
+    },
+    {
+      "month": "2025-07",
+      "count": 73,
+      "cumulative": 298
+    },
+    {
+      "month": "2025-08",
+      "count": 70,
+      "cumulative": 368
+    },
+    {
+      "month": "2025-09",
+      "count": 86,
+      "cumulative": 454
+    },
+    {
+      "month": "2025-10",
+      "count": 99,
+      "cumulative": 553
+    },
+    {
+      "month": "2025-11",
+      "count": 112,
+      "cumulative": 665
+    },
+    {
+      "month": "2025-12",
+      "count": 132,
+      "cumulative": 797
+    },
+    {
+      "month": "2026-01",
+      "count": 106,
+      "cumulative": 903
+    },
+    {
+      "month": "2026-02",
+      "count": 76,
+      "cumulative": 979
+    }
+  ],
+  "byCountry": [
+    {
+      "country": "USA",
+      "count": 683
+    },
+    {
+      "country": "Canada",
+      "count": 61
+    },
+    {
+      "country": "Australia",
+      "count": 60
+    },
+    {
+      "country": "Israel",
+      "count": 42
+    },
+    {
+      "country": "UK",
+      "count": 39
+    },
+    {
+      "country": "Brazil",
+      "count": 9
+    },
+    {
+      "country": "Argentina",
+      "count": 8
+    },
+    {
+      "country": "India",
+      "count": 7
+    },
+    {
+      "country": "Germany",
+      "count": 7
+    },
+    {
+      "country": "New Zealand",
+      "count": 6
+    },
+    {
+      "country": "France",
+      "count": 6
+    },
+    {
+      "country": "Spain",
+      "count": 5
+    },
+    {
+      "country": "Netherlands",
+      "count": 5
+    },
+    {
+      "country": "Italy",
+      "count": 5
+    },
+    {
+      "country": "Belgium",
+      "count": 4
+    },
+    {
+      "country": "Ireland",
+      "count": 4
+    },
+    {
+      "country": "Colombia",
+      "count": 3
+    },
+    {
+      "country": "Singapore",
+      "count": 3
+    },
+    {
+      "country": "South Africa",
+      "count": 3
+    },
+    {
+      "country": "",
+      "count": 3
+    },
+    {
+      "country": "UAE",
+      "count": 2
+    },
+    {
+      "country": "Austria",
+      "count": 2
+    },
+    {
+      "country": "International Arbitration",
+      "count": 2
+    },
+    {
+      "country": "Hong Kong",
+      "count": 2
+    },
+    {
+      "country": "Chile",
+      "count": 1
+    },
+    {
+      "country": "Qatar",
+      "count": 1
+    },
+    {
+      "country": "Czech Republic",
+      "count": 1
+    },
+    {
+      "country": "The Bahamas",
+      "count": 1
+    },
+    {
+      "country": "Tanzania",
+      "count": 1
+    },
+    {
+      "country": "Zimbabwe",
+      "count": 1
+    },
+    {
+      "country": "Papua New Guinea",
+      "count": 1
+    },
+    {
+      "country": "Trinidad & Tobago",
+      "count": 1
+    }
+  ],
+  "byAiTool": [
+    {
+      "tool": "Implied/Unknown",
+      "count": 841
+    },
+    {
+      "tool": "ChatGPT/GPT",
+      "count": 86
+    },
+    {
+      "tool": "Other",
+      "count": 22
+    },
+    {
+      "tool": "Microsoft Copilot",
+      "count": 11
+    },
+    {
+      "tool": "Google (Gemini/Bard)",
+      "count": 6
+    },
+    {
+      "tool": "Legal AI (CoCounsel/Westlaw)",
+      "count": 5
+    },
+    {
+      "tool": "Claude",
+      "count": 5
+    },
+    {
+      "tool": "Legal AI (LexisNexis)",
+      "count": 3
+    }
+  ],
+  "byParty": [
+    {
+      "party": "Pro Se Litigant",
+      "count": 558
+    },
+    {
+      "party": "Lawyer",
+      "count": 392
+    },
+    {
+      "party": "Judge",
+      "count": 9
+    },
+    {
+      "party": "Expert",
+      "count": 9
+    },
+    {
+      "party": "Prosecutor",
+      "count": 4
+    },
+    {
+      "party": "Paralegal",
+      "count": 2
+    },
+    {
+      "party": "Arbitrator",
+      "count": 1
+    },
+    {
+      "party": "Federal Defender",
+      "count": 1
+    }
+  ],
+  "byOutcome": [
+    {
+      "outcome": "Warning/Admonishment",
+      "count": 322
+    },
+    {
+      "outcome": "Monetary Sanction",
+      "count": 193
+    },
+    {
+      "outcome": "Pending/Unknown",
+      "count": 155
+    },
+    {
+      "outcome": "Other",
+      "count": 114
+    },
+    {
+      "outcome": "Show Cause Order",
+      "count": 64
+    },
+    {
+      "outcome": "Case Dismissed",
+      "count": 48
+    },
+    {
+      "outcome": "Bar Referral",
+      "count": 27
+    },
+    {
+      "outcome": "Filing Struck",
+      "count": 26
+    },
+    {
+      "outcome": "Arguments Ignored",
+      "count": 22
+    },
+    {
+      "outcome": "CLE Requirement",
+      "count": 8
+    }
+  ],
+  "byHallType": [
+    {
+      "type": "Fabricated",
+      "count": 1729
+    },
+    {
+      "type": "Misrepresented",
+      "count": 882
+    },
+    {
+      "type": "False Quotes",
+      "count": 558
+    },
+    {
+      "type": "Outdated Advice",
+      "count": 27
+    }
+  ],
+  "topCases": [
+    {
+      "name": "Puerto Rico Soccer League NFP, Corp., et al. v. Federación Puertorriqueña de Futbol, et al.",
+      "country": "USA",
+      "date": "2025-09-23",
+      "hallCount": 55,
+      "outcomeCategory": "Other",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Powhatan County School Board v. Skinger et al",
+      "country": "USA",
+      "date": "2025-06-02",
+      "hallCount": 43,
+      "outcomeCategory": "Filing Struck",
+      "party": "Pro Se Litigant"
+    },
+    {
+      "name": "Valu v. Minister for Immigration and Multicultural Affairs",
+      "country": "Australia",
+      "date": "2025-01-31",
+      "hallCount": 25,
+      "outcomeCategory": "Bar Referral",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Bryan Pletcher v. Village of Libertyville Police Pension Board",
+      "country": "USA",
+      "date": "2025-11-24",
+      "hallCount": 23,
+      "outcomeCategory": "Filing Struck",
+      "party": "Pro Se Litigant"
+    },
+    {
+      "name": "USA v. Burke",
+      "country": "USA",
+      "date": "2025-05-15",
+      "hallCount": 21,
+      "outcomeCategory": "Case Dismissed",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Shahid v. Esaam",
+      "country": "USA",
+      "date": "2025-06-30",
+      "hallCount": 19,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Kessler v. City of Atwater",
+      "country": "USA",
+      "date": "2025-07-11",
+      "hallCount": 18,
+      "outcomeCategory": "Show Cause Order",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Mata v. Avianca, Inc",
+      "country": "USA",
+      "date": "2023-06-22",
+      "hallCount": 18,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Pelishek v. City of Sheboygan",
+      "country": "USA",
+      "date": "2025-09-18",
+      "hallCount": 17,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    },
+    {
+      "name": "N° 2506461",
+      "country": "France",
+      "date": "2025-12-29",
+      "hallCount": 16,
+      "outcomeCategory": "Warning/Admonishment",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Virgil v. Experian Information Solutions, et al.",
+      "country": "USA",
+      "date": "2026-02-12",
+      "hallCount": 15,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Evans, et al. v. Robertson et al. (3)",
+      "country": "USA",
+      "date": "2025-11-20",
+      "hallCount": 15,
+      "outcomeCategory": "Filing Struck",
+      "party": "Pro Se Litigant"
+    },
+    {
+      "name": "XAI v XAH and another matter",
+      "country": "Singapore",
+      "date": "2025-09-03",
+      "hallCount": 15,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Pro Se Litigant"
+    },
+    {
+      "name": "Alana Kotler v Ontario Secondary School Teachers’ Federation",
+      "country": "Canada",
+      "date": "2025-08-29",
+      "hallCount": 15,
+      "outcomeCategory": "Arguments Ignored",
+      "party": "Pro Se Litigant"
+    },
+    {
+      "name": "ByoPlanet International v. Johansson and Gilstrap",
+      "country": "USA",
+      "date": "2025-07-15",
+      "hallCount": 15,
+      "outcomeCategory": "Case Dismissed",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Mavundla v. MEC",
+      "country": "South Africa",
+      "date": "2025-01-08",
+      "hallCount": 15,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Grant v. City of Long Beach",
+      "country": "USA",
+      "date": "2024-03-22",
+      "hallCount": 15,
+      "outcomeCategory": "Filing Struck",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Mavy v. Commissioner of Social Security Administration",
+      "country": "USA",
+      "date": "2026-01-13",
+      "hallCount": 14,
+      "outcomeCategory": "Filing Struck",
+      "party": "Lawyer"
+    },
+    {
+      "name": "Happiness Idehen & Felix Ogieva v. Gloria Stoute-Phillip",
+      "country": "USA",
+      "date": "2025-07-29",
+      "hallCount": 14,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    },
+    {
+      "name": "AC739-2026",
+      "country": "Colombia",
+      "date": "2026-02-13",
+      "hallCount": 13,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer"
+    }
+  ],
+  "recentCases": [
+    {
+      "name": "Kettering Adventist Healthcare v. Sandra Collier, et al.",
+      "country": "USA",
+      "date": "2026-02-25",
+      "hallCount": 9,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Louis J. Blazy v. Department of State",
+      "country": "USA",
+      "date": "2026-02-24",
+      "hallCount": 3,
+      "outcomeCategory": "Warning/Admonishment",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Chapter Kris Jackson v. BOK Financial Corporation et al. (3)",
+      "country": "USA",
+      "date": "2026-02-24",
+      "hallCount": 3,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Juan Villalovos-Gutierrez, et al. v. Gerard Van de Pol, et al. (2)",
+      "country": "USA",
+      "date": "2026-02-24",
+      "hallCount": 2,
+      "outcomeCategory": "Show Cause Order",
+      "party": "Lawyer",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Kenneth Hawkins v. I.C. System, Inc.",
+      "country": "USA",
+      "date": "2026-02-23",
+      "hallCount": 1,
+      "outcomeCategory": "Warning/Admonishment",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Gerow v. Falcone",
+      "country": "USA",
+      "date": "2026-02-20",
+      "hallCount": 1,
+      "outcomeCategory": "Pending/Unknown",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Johnson v. Florida Department of Juvenile Justice et al",
+      "country": "USA",
+      "date": "2026-02-19",
+      "hallCount": 2,
+      "outcomeCategory": "Filing Struck",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "In re: Marrett",
+      "country": "USA",
+      "date": "2026-02-19",
+      "hallCount": 2,
+      "outcomeCategory": "Pending/Unknown",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Bixler v. Church of Scientology",
+      "country": "USA",
+      "date": "2026-02-19",
+      "hallCount": 1,
+      "outcomeCategory": "Show Cause Order",
+      "party": "Lawyer",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Juandel Pena and Martina Ruiz v. Wells Fargo Bank, N.A.",
+      "country": "USA",
+      "date": "2026-02-19",
+      "hallCount": 1,
+      "outcomeCategory": "Pending/Unknown",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Kennon v. Ashley",
+      "country": "USA",
+      "date": "2026-02-18",
+      "hallCount": 9,
+      "outcomeCategory": "Show Cause Order",
+      "party": "Lawyer",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "EFD USA, INC., et al. v. Band Pro Film and Digital, Inc., et al.",
+      "country": "USA",
+      "date": "2026-02-18",
+      "hallCount": 6,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Fletcher v. Experian Information Solutions & Bridgecrest Credit Company",
+      "country": "USA",
+      "date": "2026-02-18",
+      "hallCount": 4,
+      "outcomeCategory": "Monetary Sanction",
+      "party": "Lawyer",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "David Martin v. ODS Community Dental Insurance et al.",
+      "country": "USA",
+      "date": "2026-02-18",
+      "hallCount": 2,
+      "outcomeCategory": "Pending/Unknown",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    },
+    {
+      "name": "Kendle Mardis v. Dealer Loyalty Protection, Inc., et al.",
+      "country": "USA",
+      "date": "2026-02-18",
+      "hallCount": 1,
+      "outcomeCategory": "Warning/Admonishment",
+      "party": "Pro Se Litigant",
+      "aiTool": "Implied/Unknown"
+    }
+  ]
+}

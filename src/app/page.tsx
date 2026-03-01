@@ -331,7 +331,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.yoyGrowth")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.yoyGrowth.sub")}</p>
                   <div className="h-64">
-                    <ClientOnly><ResponsiveContainer>
+                    <ClientOnly fallbackHeight="h-64"><ResponsiveContainer>
                       <BarChart data={data.byYear} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />
@@ -358,7 +358,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.jurisdiction")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.jurisdiction.sub")}</p>
                   <div className="h-96">
-                    <ClientOnly><ResponsiveContainer>
+                    <ClientOnly fallbackHeight="h-96"><ResponsiveContainer>
                       <Treemap
                         data={treemapData}
                         dataKey="size"
@@ -455,7 +455,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.whoFiled")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.whoFiled.sub")}</p>
                   <div className="h-64">
-                    <ClientOnly><ResponsiveContainer>
+                    <ClientOnly fallbackHeight="h-64"><ResponsiveContainer>
                       <BarChart data={data.byParty.slice(0, 6)}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis dataKey="party" stroke="#475569" tick={{ fontSize: 12 }} />
@@ -482,7 +482,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.courtOutcomes")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.courtOutcomes.sub")}</p>
                   <div className="h-96">
-                    <ClientOnly><ResponsiveContainer>
+                    <ClientOnly fallbackHeight="h-96"><ResponsiveContainer>
                       <BarChart data={data.byOutcome} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />

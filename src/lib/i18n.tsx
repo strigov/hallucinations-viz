@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useCallback, useEffect, useSyncExternalStore, type ReactNode } from "react";
 
 export type Lang = "ru" | "en";
 
@@ -162,24 +162,32 @@ const I18nContext = createContext<I18nContextType>({
   t: (key) => key,
 });
 
-function getInitialLang(): Lang {
-  if (typeof window !== "undefined") {
-    const stored = localStorage.getItem("lang");
-    if (stored === "en" || stored === "ru") return stored;
-  }
+// Language store for useSyncExternalStore — avoids hydration mismatch.
+// Server snapshot always returns "ru"; client reads localStorage.
+// After hydration React reconciles the difference without a warning.
+let langListeners: Array<() => void> = [];
+function subscribeLang(cb: () => void) {
+  langListeners.push(cb);
+  return () => { langListeners = langListeners.filter(l => l !== cb); };
+}
+function getClientLang(): Lang {
+  const stored = localStorage.getItem("lang");
+  return stored === "en" ? "en" : "ru";
+}
+function getServerLang(): Lang {
   return "ru";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(getInitialLang);
+  const lang = useSyncExternalStore(subscribeLang, getClientLang, getServerLang);
 
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
 
   const setLang = useCallback((newLang: Lang) => {
-    setLangState(newLang);
     localStorage.setItem("lang", newLang);
+    langListeners.forEach(cb => cb());
   }, []);
 
   const t = useCallback(

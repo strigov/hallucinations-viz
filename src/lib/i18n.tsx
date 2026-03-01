@@ -148,18 +148,89 @@ const translations = {
   },
 } as const;
 
+// Data-driven labels: translate values coming from data.json
+const dataLabels: Record<string, { ru: string; en: string }> = {
+  // Countries
+  "USA": { ru: "США", en: "USA" },
+  "Canada": { ru: "Канада", en: "Canada" },
+  "Australia": { ru: "Австралия", en: "Australia" },
+  "Israel": { ru: "Израиль", en: "Israel" },
+  "UK": { ru: "Великобритания", en: "UK" },
+  "Brazil": { ru: "Бразилия", en: "Brazil" },
+  "Argentina": { ru: "Аргентина", en: "Argentina" },
+  "India": { ru: "Индия", en: "India" },
+  "Germany": { ru: "Германия", en: "Germany" },
+  "New Zealand": { ru: "Новая Зеландия", en: "New Zealand" },
+  "France": { ru: "Франция", en: "France" },
+  "Spain": { ru: "Испания", en: "Spain" },
+  "Netherlands": { ru: "Нидерланды", en: "Netherlands" },
+  "Italy": { ru: "Италия", en: "Italy" },
+  "Belgium": { ru: "Бельгия", en: "Belgium" },
+  "Ireland": { ru: "Ирландия", en: "Ireland" },
+  "Colombia": { ru: "Колумбия", en: "Colombia" },
+  "Singapore": { ru: "Сингапур", en: "Singapore" },
+  "South Africa": { ru: "ЮАР", en: "South Africa" },
+  "UAE": { ru: "ОАЭ", en: "UAE" },
+  "Austria": { ru: "Австрия", en: "Austria" },
+  "International Arbitration": { ru: "Межд. арбитраж", en: "International Arbitration" },
+  "Hong Kong": { ru: "Гонконг", en: "Hong Kong" },
+  "Chile": { ru: "Чили", en: "Chile" },
+  "Qatar": { ru: "Катар", en: "Qatar" },
+  "Czech Republic": { ru: "Чехия", en: "Czech Republic" },
+  "The Bahamas": { ru: "Багамы", en: "The Bahamas" },
+  "Tanzania": { ru: "Танзания", en: "Tanzania" },
+  "Zimbabwe": { ru: "Зимбабве", en: "Zimbabwe" },
+  "Papua New Guinea": { ru: "Папуа — Новая Гвинея", en: "Papua New Guinea" },
+  "Trinidad & Tobago": { ru: "Тринидад и Тобаго", en: "Trinidad & Tobago" },
+  // AI Tools
+  "Implied/Unknown": { ru: "Подразумевается/Неизвестно", en: "Implied/Unknown" },
+  "ChatGPT/GPT": { ru: "ChatGPT/GPT", en: "ChatGPT/GPT" },
+  "Other": { ru: "Другое", en: "Other" },
+  "Microsoft Copilot": { ru: "Microsoft Copilot", en: "Microsoft Copilot" },
+  "Google (Gemini/Bard)": { ru: "Google (Gemini/Bard)", en: "Google (Gemini/Bard)" },
+  "Legal AI (CoCounsel/Westlaw)": { ru: "Юрид. ИИ (CoCounsel/Westlaw)", en: "Legal AI (CoCounsel/Westlaw)" },
+  "Claude": { ru: "Claude", en: "Claude" },
+  "Legal AI (LexisNexis)": { ru: "Юрид. ИИ (LexisNexis)", en: "Legal AI (LexisNexis)" },
+  // Hallucination types
+  "Fabricated": { ru: "Сфабрикованные", en: "Fabricated" },
+  "Misrepresented": { ru: "Искажённые", en: "Misrepresented" },
+  "False Quotes": { ru: "Ложные цитаты", en: "False Quotes" },
+  "Outdated Advice": { ru: "Устаревшие рекомендации", en: "Outdated Advice" },
+  // Party types
+  "Pro Se Litigant": { ru: "Самопредставляющийся", en: "Pro Se Litigant" },
+  "Lawyer": { ru: "Юрист", en: "Lawyer" },
+  "Judge": { ru: "Судья", en: "Judge" },
+  "Expert": { ru: "Эксперт", en: "Expert" },
+  "Prosecutor": { ru: "Прокурор", en: "Prosecutor" },
+  "Paralegal": { ru: "Параюрист", en: "Paralegal" },
+  "Arbitrator": { ru: "Арбитр", en: "Arbitrator" },
+  "Federal Defender": { ru: "Фед. защитник", en: "Federal Defender" },
+  // Outcome categories
+  "Warning/Admonishment": { ru: "Предупреждение", en: "Warning/Admonishment" },
+  "Monetary Sanction": { ru: "Денежный штраф", en: "Monetary Sanction" },
+  "Pending/Unknown": { ru: "На рассмотрении", en: "Pending/Unknown" },
+  "Show Cause Order": { ru: "Требование объяснений", en: "Show Cause Order" },
+  "Case Dismissed": { ru: "Дело прекращено", en: "Case Dismissed" },
+  "Bar Referral": { ru: "Направление в коллегию", en: "Bar Referral" },
+  "Filing Struck": { ru: "Документ отклонён", en: "Filing Struck" },
+  "Arguments Ignored": { ru: "Аргументы отклонены", en: "Arguments Ignored" },
+  "CLE Requirement": { ru: "Требование повышения квалификации", en: "CLE Requirement" },
+};
+
 export type TranslationKey = keyof typeof translations;
 
 interface I18nContextType {
   lang: Lang;
   setLang: (lang: Lang) => void;
   t: (key: TranslationKey) => string;
+  td: (value: string) => string;
 }
 
 const I18nContext = createContext<I18nContextType>({
   lang: "ru",
   setLang: () => {},
   t: (key) => key,
+  td: (value) => value,
 });
 
 // Language store for useSyncExternalStore — avoids hydration mismatch.
@@ -199,8 +270,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [lang]
   );
 
+  const td = useCallback(
+    (value: string): string => {
+      const entry = dataLabels[value];
+      if (!entry) return value;
+      return entry[lang] || value;
+    },
+    [lang]
+  );
+
   return (
-    <I18nContext value={{ lang, setLang, t }}>
+    <I18nContext value={{ lang, setLang, t, td }}>
       {children}
     </I18nContext>
   );

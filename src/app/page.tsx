@@ -153,12 +153,12 @@ function LangSwitch() {
 }
 
 function Dashboard() {
-  const { t } = useTranslation();
+  const { t, td } = useTranslation();
   const [activeTab, setActiveTab] = useState<"timeline" | "geography" | "tools" | "outcomes" | "penalties">("timeline");
 
   // Prepare treemap data for countries
   const treemapData = data.byCountry.slice(0, 15).map((c, i) => ({
-    name: c.country,
+    name: td(c.country),
     size: c.count,
     count: c.count,
     index: i,
@@ -166,7 +166,7 @@ function Dashboard() {
 
   // Hallucination types for donut
   const hallTypeData = data.byHallType.map((h) => ({
-    name: h.type,
+    name: td(h.type),
     value: h.count,
   }));
 
@@ -375,10 +375,10 @@ function Dashboard() {
                   <p className="text-sm text-slate-500 mb-4">{t("chart.topJurisdictions.sub")}</p>
                   <div className="h-80">
                     <ClientOnly><ResponsiveContainer>
-                      <BarChart data={data.byCountry.slice(0, 12)} layout="vertical">
+                      <BarChart data={data.byCountry.slice(0, 12).map(c => ({ ...c, countryLabel: td(c.country) }))} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />
-                        <YAxis type="category" dataKey="country" stroke="#475569" tick={{ fontSize: 12 }} width={100} />
+                        <YAxis type="category" dataKey="countryLabel" stroke="#475569" tick={{ fontSize: 12 }} width={140} />
                         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.08)' }} />
                         <Bar dataKey="count" fill={COLORS.blue} radius={[0, 4, 4, 0]} name={t("tooltip.cases")}>
                           {data.byCountry.slice(0, 12).map((_, i) => (
@@ -403,7 +403,7 @@ function Dashboard() {
                   <div className="h-80">
                     <ClientOnly><ResponsiveContainer>
                       <PieChart>
-                        <Pie data={data.byAiTool} dataKey="count" nameKey="tool" cx="50%" cy="50%"
+                        <Pie data={data.byAiTool.map(item => ({ ...item, toolLabel: td(item.tool) }))} dataKey="count" nameKey="toolLabel" cx="50%" cy="50%"
                           outerRadius={120} innerRadius={60} paddingAngle={2} strokeWidth={0}>
                           {data.byAiTool.map((_, i) => (
                             <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
@@ -414,10 +414,10 @@ function Dashboard() {
                     </ResponsiveContainer></ClientOnly>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {data.byAiTool.map((t, i) => (
+                    {data.byAiTool.map((item, i) => (
                       <span key={i} className="inline-flex items-center gap-1.5 text-xs text-slate-300 bg-[#1e293b] rounded-full px-3 py-1">
                         <span className="w-2 h-2 rounded-full" style={{ background: PIE_COLORS[i % PIE_COLORS.length] }}></span>
-                        {t.tool} ({t.count})
+                        {td(item.tool)} ({item.count})
                       </span>
                     ))}
                   </div>
@@ -456,9 +456,9 @@ function Dashboard() {
                   <p className="text-sm text-slate-500 mb-4">{t("chart.whoFiled.sub")}</p>
                   <div className="h-64">
                     <ClientOnly fallbackHeight="h-64"><ResponsiveContainer>
-                      <BarChart data={data.byParty.slice(0, 6)}>
+                      <BarChart data={data.byParty.slice(0, 6).map(p => ({ ...p, partyLabel: td(p.party) }))}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                        <XAxis dataKey="party" stroke="#475569" tick={{ fontSize: 12 }} />
+                        <XAxis dataKey="partyLabel" stroke="#475569" tick={{ fontSize: 12 }} />
                         <YAxis stroke="#475569" tick={{ fontSize: 11 }} />
                         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.08)' }} />
                         <Bar dataKey="count" radius={[4, 4, 0, 0]} name={t("tooltip.cases")}>
@@ -483,10 +483,10 @@ function Dashboard() {
                   <p className="text-sm text-slate-500 mb-4">{t("chart.courtOutcomes.sub")}</p>
                   <div className="h-96">
                     <ClientOnly fallbackHeight="h-96"><ResponsiveContainer>
-                      <BarChart data={data.byOutcome} layout="vertical">
+                      <BarChart data={data.byOutcome.map(o => ({ ...o, outcomeLabel: td(o.outcome) }))} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />
-                        <YAxis type="category" dataKey="outcome" stroke="#475569" tick={{ fontSize: 12 }} width={160} />
+                        <YAxis type="category" dataKey="outcomeLabel" stroke="#475569" tick={{ fontSize: 12 }} width={220} />
                         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.08)' }} />
                         <Bar dataKey="count" radius={[0, 4, 4, 0]} name={t("tooltip.cases")}>
                           {data.byOutcome.map((_, i) => (
@@ -729,15 +729,15 @@ function Dashboard() {
                   >
                     <td className="px-6 py-3 text-slate-400 whitespace-nowrap font-mono text-xs">{c.date}</td>
                     <td className="px-6 py-3 text-slate-200 max-w-xs truncate">{c.name}</td>
-                    <td className="px-6 py-3 text-slate-400">{c.country}</td>
+                    <td className="px-6 py-3 text-slate-400">{td(c.country)}</td>
                     <td className="px-6 py-3">
                       <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
                         c.party === "Lawyer" ? "bg-blue-500/20 text-blue-400" :
                         c.party === "Pro Se Litigant" ? "bg-amber-500/20 text-amber-400" :
                         "bg-slate-500/20 text-slate-400"
-                      }`}>{c.party}</span>
+                      }`}>{td(c.party)}</span>
                     </td>
-                    <td className="px-6 py-3 text-slate-400 text-xs">{c.aiTool}</td>
+                    <td className="px-6 py-3 text-slate-400 text-xs">{td(c.aiTool)}</td>
                     <td className="px-6 py-3 text-center">
                       <span className="inline-block min-w-[2rem] text-center px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs font-medium">
                         {c.hallCount}
@@ -749,7 +749,7 @@ function Dashboard() {
                         c.outcomeCategory === "Warning/Admonishment" ? "bg-amber-500/20 text-amber-400" :
                         c.outcomeCategory === "Bar Referral" ? "bg-red-500/20 text-red-400" :
                         "bg-slate-500/20 text-slate-400"
-                      }`}>{c.outcomeCategory}</span>
+                      }`}>{td(c.outcomeCategory)}</span>
                     </td>
                   </motion.tr>
                 ))}

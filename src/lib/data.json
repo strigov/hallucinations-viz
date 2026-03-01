@@ -3,31 +3,31 @@
   "totalHallucinations": 3196,
   "totalPenalties": 178,
   "totalSanctions": 87,
-  "totalPenaltySum": 2007342,
-  "avgPenalty": 11277,
-  "medianPenalty": 1500,
+  "totalPenaltySum": 1289259,
+  "avgPenalty": 7243,
+  "medianPenalty": 1000,
   "minPenalty": 1,
-  "maxPenalty": 620000,
+  "maxPenalty": 282508,
   "penaltyRanges": [
     {
       "range": "<$500",
-      "count": 35
+      "count": 48
     },
     {
       "range": "$500–$1K",
-      "count": 20
+      "count": 24
     },
     {
       "range": "$1K–$5K",
-      "count": 64
+      "count": 57
     },
     {
       "range": "$5K–$10K",
-      "count": 30
+      "count": 24
     },
     {
       "range": "$10K–$25K",
-      "count": 16
+      "count": 14
     },
     {
       "range": "$25K–$50K",
@@ -35,27 +35,21 @@
     },
     {
       "range": "$50K–$100K",
-      "count": 5
+      "count": 4
     },
     {
       "range": "$100K+",
-      "count": 3
+      "count": 2
     }
   ],
   "topPenalties": [
-    {
-      "name": "Ortiz Fatima Cecilia v. Booking.com y otros",
-      "country": "Argentina",
-      "date": "2026-02-02",
-      "amount": 620000,
-      "party": "Lawyer",
-      "outcomeCategory": "Monetary Sanction"
-    },
     {
       "name": "Arabyads Holding Limited v. Gulrez Alam Marghoob Alam",
       "country": "UAE",
       "date": "2025-12-18",
       "amount": 282508,
+      "originalAmount": 282508,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Other"
     },
@@ -63,7 +57,9 @@
       "name": "Crypto Open Patent Alliance v. Wright (2)",
       "country": "UK",
       "date": "2025-05-12",
-      "amount": 100000,
+      "amount": 126000,
+      "originalAmount": 100000,
+      "currency": "GBP",
       "party": "Pro Se Litigant",
       "outcomeCategory": "Monetary Sanction"
     },
@@ -72,6 +68,8 @@
       "country": "USA",
       "date": "2025-07-15",
       "amount": 85567,
+      "originalAmount": 85567,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Case Dismissed"
     },
@@ -80,6 +78,8 @@
       "country": "USA",
       "date": "2025-12-23",
       "amount": 66129,
+      "originalAmount": 66129,
+      "currency": "USD",
       "party": "Pro Se Litigant",
       "outcomeCategory": "Monetary Sanction"
     },
@@ -88,6 +88,8 @@
       "country": "USA",
       "date": "2025-12-15",
       "amount": 64235,
+      "originalAmount": 64235,
+      "currency": "USD",
       "party": "Pro Se Litigant",
       "outcomeCategory": "Monetary Sanction"
     },
@@ -96,15 +98,19 @@
       "country": "USA",
       "date": "2025-12-05",
       "amount": 59500,
+      "originalAmount": 59500,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Monetary Sanction"
     },
     {
-      "name": "Mahala Association (מהל\"ה) v. Clalit Health Services et al.",
-      "country": "",
-      "date": "2025-05-26",
-      "amount": 50000,
-      "party": "Lawyer",
+      "name": "Bandla v. Solicitors Regulation Authority",
+      "country": "UK",
+      "date": "2025-05-13",
+      "amount": 31156,
+      "originalAmount": 24727,
+      "currency": "GBP",
+      "party": "Pro Se Litigant",
       "outcomeCategory": "Monetary Sanction"
     },
     {
@@ -112,6 +118,8 @@
       "country": "USA",
       "date": "2025-05-06",
       "amount": 31100,
+      "originalAmount": 31100,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Monetary Sanction"
     },
@@ -120,6 +128,8 @@
       "country": "USA",
       "date": "2025-10-22",
       "amount": 28495,
+      "originalAmount": 28495,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Warning/Admonishment"
     },
@@ -128,6 +138,8 @@
       "country": "USA",
       "date": "2025-11-14",
       "amount": 28000,
+      "originalAmount": 28000,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Monetary Sanction"
     },
@@ -135,24 +147,10 @@
       "name": "Unknown Case Number",
       "country": "Belgium",
       "date": "2025-12-25",
-      "amount": 25000,
+      "amount": 26250,
+      "originalAmount": 25000,
+      "currency": "EUR",
       "party": "Lawyer",
-      "outcomeCategory": "Monetary Sanction"
-    },
-    {
-      "name": "Zlatin v. Assayag et al",
-      "country": "Israel",
-      "date": "2025-07-11",
-      "amount": 25000,
-      "party": "Lawyer",
-      "outcomeCategory": "Monetary Sanction"
-    },
-    {
-      "name": "Bandla v. Solicitors Regulation Authority",
-      "country": "UK",
-      "date": "2025-05-13",
-      "amount": 24727,
-      "party": "Pro Se Litigant",
       "outcomeCategory": "Monetary Sanction"
     },
     {
@@ -160,26 +158,58 @@
       "country": "USA",
       "date": "2025-09-23",
       "amount": 24492,
+      "originalAmount": 24492,
+      "currency": "USD",
       "party": "Lawyer",
       "outcomeCategory": "Other"
+    },
+    {
+      "name": "Disability Rights Mississippi v. Palmer Home for Children",
+      "country": "USA",
+      "date": "2025-12-19",
+      "amount": 20883,
+      "originalAmount": 20883,
+      "currency": "USD",
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Couvrette v. Wisnovsky",
+      "country": "USA",
+      "date": "2025-12-12",
+      "amount": 15500,
+      "originalAmount": 15500,
+      "currency": "USD",
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
+    },
+    {
+      "name": "Ayinde v. Borough of Haringey",
+      "country": "UK",
+      "date": "2025-04-03",
+      "amount": 13860,
+      "originalAmount": 11000,
+      "currency": "GBP",
+      "party": "Lawyer",
+      "outcomeCategory": "Monetary Sanction"
     }
   ],
   "penaltyByYear": [
     {
       "year": "2023",
-      "total": 7604
+      "total": 5443
     },
     {
       "year": "2024",
-      "total": 15000
+      "total": 14270
     },
     {
       "year": "2025",
-      "total": 1302010
+      "total": 1210192
     },
     {
       "year": "2026",
-      "total": 682728
+      "total": 59354
     }
   ],
   "byYear": [

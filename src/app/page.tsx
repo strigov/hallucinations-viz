@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
@@ -46,6 +46,14 @@ function useCounter(target: number, duration = 2000) {
   return { count, ref };
 }
 
+// Client-only wrapper to avoid Recharts SSR measurement warnings
+const emptySubscribe = () => () => {};
+function ClientOnly({ children, fallbackHeight = "h-80" }: { children: React.ReactNode; fallbackHeight?: string }) {
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
+  if (!mounted) return <div className={`${fallbackHeight} bg-[#111827]/50 rounded-lg animate-pulse`} />;
+  return <>{children}</>;
+}
+
 // Section wrapper with scroll animation
 function Section({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -89,12 +97,12 @@ function StatCard({ label, value, suffix = "", icon, color, delay = 0 }: {
 }
 
 // Custom tooltip
-function CustomTooltip({ active, payload, label }: any) {
+function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ name: string; value: number | string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-[#111827] border border-[#1e293b] rounded-lg px-4 py-3 shadow-xl">
       <p className="text-slate-400 text-sm mb-1">{label}</p>
-      {payload.map((p: any, i: number) => (
+      {payload.map((p, i) => (
         <p key={i} className="text-sm font-medium" style={{ color: p.color }}>
           {p.name}: {typeof p.value === 'number' ? p.value.toLocaleString() : p.value}
         </p>
@@ -104,8 +112,8 @@ function CustomTooltip({ active, payload, label }: any) {
 }
 
 // Treemap custom content
-function TreemapContent(props: any) {
-  const { x, y, width, height, name, count, index } = props;
+function TreemapContent(props: { x?: number; y?: number; width?: number; height?: number; name?: string; count?: number; index?: number }) {
+  const { x = 0, y = 0, width = 0, height = 0, name, count, index = 0 } = props;
   if (width < 50 || height < 30) return null;
   return (
     <g>
@@ -244,10 +252,10 @@ function Dashboard() {
       {/* Stats Grid */}
       <div className="max-w-7xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard label={t("stat.totalCases")} value={data.totalCases} icon="&#9878;" color={COLORS.blue} delay={0} />
-          <StatCard label={t("stat.hallucinations")} value={data.totalHallucinations} icon="&#9888;" color={COLORS.amber} delay={0.1} />
+          <StatCard label={t("stat.totalCases")} value={data.totalCases} icon={"\u2696"} color={COLORS.blue} delay={0} />
+          <StatCard label={t("stat.hallucinations")} value={data.totalHallucinations} icon={"\u26A0"} color={COLORS.amber} delay={0.1} />
           <StatCard label={t("stat.penalties")} value={data.totalPenalties} icon="$" color={COLORS.emerald} delay={0.2} />
-          <StatCard label={t("stat.sanctions")} value={data.totalSanctions} icon="&#9888;" color={COLORS.red} delay={0.3} />
+          <StatCard label={t("stat.sanctions")} value={data.totalSanctions} icon={"\u26A0"} color={COLORS.red} delay={0.3} />
         </div>
       </div>
 
@@ -281,7 +289,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.cumulativeGrowth")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.cumulativeGrowth.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <AreaChart data={data.timeline}>
                         <defs>
                           <linearGradient id="gradBlue" x1="0" y1="0" x2="0" y2="1">
@@ -296,7 +304,7 @@ function Dashboard() {
                         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.08)' }} />
                         <Area type="monotone" dataKey="cumulative" stroke={COLORS.blue} fill="url(#gradBlue)" strokeWidth={2} name={t("tooltip.totalCases")} />
                       </AreaChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
 
@@ -305,7 +313,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.monthlyCases")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.monthlyCases.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.timeline}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis dataKey="month" stroke="#475569" tick={{ fontSize: 11 }}
@@ -314,7 +322,7 @@ function Dashboard() {
                         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.08)' }} />
                         <Bar dataKey="count" fill={COLORS.cyan} radius={[4, 4, 0, 0]} name={t("tooltip.newCases")} />
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
 
@@ -323,7 +331,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.yoyGrowth")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.yoyGrowth.sub")}</p>
                   <div className="h-64">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.byYear} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />
@@ -335,7 +343,7 @@ function Dashboard() {
                           ))}
                         </Bar>
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
               </div>
@@ -350,14 +358,14 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.jurisdiction")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.jurisdiction.sub")}</p>
                   <div className="h-96">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <Treemap
                         data={treemapData}
                         dataKey="size"
                         aspectRatio={4 / 3}
                         content={<TreemapContent />}
                       />
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
 
@@ -366,7 +374,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.topJurisdictions")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.topJurisdictions.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.byCountry.slice(0, 12)} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />
@@ -378,7 +386,7 @@ function Dashboard() {
                           ))}
                         </Bar>
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
               </div>
@@ -393,7 +401,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.aiTools")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.aiTools.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <PieChart>
                         <Pie data={data.byAiTool} dataKey="count" nameKey="tool" cx="50%" cy="50%"
                           outerRadius={120} innerRadius={60} paddingAngle={2} strokeWidth={0}>
@@ -403,7 +411,7 @@ function Dashboard() {
                         </Pie>
                         <Tooltip content={<CustomTooltip />} cursor={false} />
                       </PieChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {data.byAiTool.map((t, i) => (
@@ -420,7 +428,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.hallTypes")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.hallTypes.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <PieChart>
                         <Pie data={hallTypeData} dataKey="value" nameKey="name" cx="50%" cy="50%"
                           outerRadius={120} innerRadius={60} paddingAngle={3} strokeWidth={0}>
@@ -430,7 +438,7 @@ function Dashboard() {
                         </Pie>
                         <Tooltip content={<CustomTooltip />} cursor={false} />
                       </PieChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {hallTypeData.map((h, i) => (
@@ -447,7 +455,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.whoFiled")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.whoFiled.sub")}</p>
                   <div className="h-64">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.byParty.slice(0, 6)}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis dataKey="party" stroke="#475569" tick={{ fontSize: 12 }} />
@@ -459,7 +467,7 @@ function Dashboard() {
                           ))}
                         </Bar>
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
               </div>
@@ -474,7 +482,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("chart.courtOutcomes")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("chart.courtOutcomes.sub")}</p>
                   <div className="h-96">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.byOutcome} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis type="number" stroke="#475569" tick={{ fontSize: 11 }} />
@@ -486,7 +494,7 @@ function Dashboard() {
                           ))}
                         </Bar>
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
 
@@ -579,25 +587,26 @@ function Dashboard() {
                     <div>
                       <p className="text-sm text-slate-400 uppercase tracking-wider mb-1">{t("penalties.totalFines")}</p>
                       <p className="text-4xl sm:text-5xl font-bold text-emerald-400">
-                        ${(data.totalPenaltySum / 1e6).toFixed(1)}M+
+                        ~${(data.totalPenaltySum / 1e6).toFixed(1)}M
                       </p>
+                      <p className="text-xs text-slate-500 mt-1">{t("penalties.approxNote")}</p>
                     </div>
                     <div className="flex flex-wrap gap-6">
                       <div>
                         <p className="text-xs text-slate-500 uppercase tracking-wider">{t("penalties.average")}</p>
-                        <p className="text-xl font-semibold text-white">${data.avgPenalty.toLocaleString()}</p>
+                        <p className="text-xl font-semibold text-white">~${data.avgPenalty.toLocaleString()}</p>
                       </div>
                       <div>
                         <p className="text-xs text-slate-500 uppercase tracking-wider">{t("penalties.median")}</p>
-                        <p className="text-xl font-semibold text-white">${data.medianPenalty.toLocaleString()}</p>
+                        <p className="text-xl font-semibold text-white">~${data.medianPenalty.toLocaleString()}</p>
                       </div>
                       <div>
                         <p className="text-xs text-slate-500 uppercase tracking-wider">{t("penalties.min")}</p>
-                        <p className="text-xl font-semibold text-white">${data.minPenalty.toLocaleString()}</p>
+                        <p className="text-xl font-semibold text-white">~${data.minPenalty.toLocaleString()}</p>
                       </div>
                       <div>
                         <p className="text-xs text-slate-500 uppercase tracking-wider">{t("penalties.max")}</p>
-                        <p className="text-xl font-semibold text-white">${data.maxPenalty.toLocaleString()}</p>
+                        <p className="text-xl font-semibold text-white">~${data.maxPenalty.toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
@@ -608,7 +617,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("penalties.distribution")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("penalties.distribution.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.penaltyRanges}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis dataKey="range" stroke="#475569" tick={{ fontSize: 10 }} angle={-20} textAnchor="end" height={60} />
@@ -616,7 +625,7 @@ function Dashboard() {
                         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.08)' }} />
                         <Bar dataKey="count" radius={[4, 4, 0, 0]} name={t("tooltip.cases")} fill={COLORS.emerald} />
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
 
@@ -625,7 +634,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold mb-1">{t("penalties.byYear")}</h3>
                   <p className="text-sm text-slate-500 mb-4">{t("penalties.byYear.sub")}</p>
                   <div className="h-80">
-                    <ResponsiveContainer>
+                    <ClientOnly><ResponsiveContainer>
                       <BarChart data={data.penaltyByYear}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis dataKey="year" stroke="#475569" tick={{ fontSize: 12 }} />
@@ -637,7 +646,7 @@ function Dashboard() {
                           ))}
                         </Bar>
                       </BarChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer></ClientOnly>
                   </div>
                 </div>
 
@@ -675,8 +684,8 @@ function Dashboard() {
                             </span>
                           </div>
                         </div>
-                        <span className="text-sm font-bold text-emerald-400 tabular-nums w-20 text-right">
-                          ${c.amount.toLocaleString()}
+                        <span className="text-sm font-bold text-emerald-400 tabular-nums text-right whitespace-nowrap">
+                          {c.currency === 'USD' ? `$${c.originalAmount.toLocaleString()}` : `${c.originalAmount.toLocaleString()} ${c.currency}`}
                         </span>
                       </motion.div>
                     ))}

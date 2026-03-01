@@ -96,6 +96,7 @@ const translations = {
   "penalties.median": { ru: "Медиана", en: "Median" },
   "penalties.min": { ru: "Мин", en: "Min" },
   "penalties.max": { ru: "Макс", en: "Max" },
+  "penalties.approxNote": { ru: "Суммы конвертированы в USD по приблизительным курсам", en: "Amounts converted to USD at approximate exchange rates" },
   "penalties.distribution": { ru: "Распределение штрафов", en: "Penalty Distribution" },
   "penalties.distribution.sub": { ru: "Количество дел по диапазону штрафа", en: "Number of cases by penalty amount range" },
   "penalties.byYear": { ru: "Штрафы по годам", en: "Total Penalties by Year" },
@@ -161,15 +162,20 @@ const I18nContext = createContext<I18nContextType>({
   t: (key) => key,
 });
 
+function getInitialLang(): Lang {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem("lang");
+    if (stored === "en" || stored === "ru") return stored;
+  }
+  return "ru";
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("ru");
+  const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   useEffect(() => {
-    const stored = localStorage.getItem("lang") as Lang | null;
-    if (stored === "en" || stored === "ru") {
-      setLangState(stored);
-    }
-  }, []);
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);

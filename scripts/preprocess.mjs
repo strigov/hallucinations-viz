@@ -46,13 +46,22 @@ const cases = records.map((r, i) => {
   else if (outLower.includes('cle') || outLower.includes('education')) outcomeCategory = 'CLE Requirement';
   else if (!outcome) outcomeCategory = 'Pending/Unknown';
 
-  // Parse monetary penalty
+  // Parse monetary penalty with currency conversion to USD
+  // Approximate rates as of early 2026 — used only for aggregation/ranking
+  const FX_TO_USD = {
+    USD: 1, CAD: 0.71, AUD: 0.63, GBP: 1.26, EUR: 1.05,
+    ILS: 0.27, SGD: 0.74, BRL: 0.17, ARS: 0.001,
+  };
   let penaltyAmount = 0;
+  let penaltyCurrency = 'USD';
   const penalty = (r['Monetary Penalty'] || '').trim();
   if (penalty) {
     const nums = penalty.match(/[\d,]+/);
     if (nums) penaltyAmount = parseInt(nums[0].replace(/,/g, ''));
+    const currMatch = penalty.match(/[A-Z]{3}/);
+    penaltyCurrency = currMatch ? currMatch[0] : 'USD';
   }
+  const penaltyUsd = Math.round(penaltyAmount * (FX_TO_USD[penaltyCurrency] ?? 1));
 
   return {
     id: i,
@@ -68,8 +77,10 @@ const cases = records.map((r, i) => {
     hallCount: hallItems.length,
     outcome,
     outcomeCategory,
-    penaltyAmount,
-    hasPenalty: penaltyAmount > 0,
+    penaltyAmount: penaltyUsd,
+    penaltyOriginal: penaltyAmount,
+    penaltyCurrency,
+    hasPenalty: penaltyUsd > 0,
     hasSanction: (r['Professional Sanction'] || '').trim().toLowerCase() === 'yes',
     source: r['Source'] || '',
     details: r['Details'] || '',
@@ -156,7 +167,7 @@ const penaltyRanges = penaltyBuckets.map(b => ({
 const topPenalties = [...casesWithPenalty]
   .sort((a, b) => b.penaltyAmount - a.penaltyAmount)
   .slice(0, 15)
-  .map(c => ({ name: c.name, country: c.country, date: c.date, amount: c.penaltyAmount, party: c.party, outcomeCategory: c.outcomeCategory }));
+  .map(c => ({ name: c.name, country: c.country, date: c.date, amount: c.penaltyAmount, originalAmount: c.penaltyOriginal, currency: c.penaltyCurrency, party: c.party, outcomeCategory: c.outcomeCategory }));
 
 // Penalty by year
 const penaltyByYearMap = {};
